@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#EEEEEE"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_width="375dp"
+                android:layout_height="390dp"
+                android:id="@+id/status_card"
+                android:layout_gravity="center"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HW Revision"
+                    android:id="@+id/hw_revision_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_1"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_1"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SW Revision"
+                    android:id="@+id/sw_revision_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="45dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_2"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LED On Minutes"
+                    android:id="@+id/led_on_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_3"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="75dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_3"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Driver Act Time"
+                    android:id="@+id/driver_act_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_4"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="105dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_4"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 115c"
+                    android:id="@+id/hundred_fifteenc_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="135dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_5"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="135dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_5"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="135dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 110c"
+                    android:id="@+id/hundred_tenc_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="165dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_6"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="165dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_6"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="165dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 105c"
+                    android:id="@+id/hundred_fivec_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="195dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_7"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="195dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_7"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="195dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 100c"
+                    android:id="@+id/hundredc_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="225dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_8"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="225dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_8"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="225dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 95c"
+                    android:id="@+id/ninety_fivec_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="255dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_9"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="255dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_9"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="255dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 90c"
+                    android:id="@+id/ninetyc_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="285dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_10"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="285dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_10"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="285dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 85c"
+                    android:id="@+id/eighty_fivec_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="315dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_11"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="315dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_11"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="315dp"
+                    android:layout_marginRight="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minuties above 80c"
+                    android:id="@+id/eightyc_text"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="345dp"
+                    android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:id="@+id/stat_colon_12"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="345dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:id="@+id/stat_loading_12"
+                    android:layout_gravity="top|right"
+                    android:layout_marginTop="345dp"
+                    android:layout_marginRight="45dp"/>
+
+
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
