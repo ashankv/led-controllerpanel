@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="SMART LED CONTROLLER"
-        android:layout_above="@id/nextButton"
+        android:layout_above="@+id/nextButton"
         android:id="@+id/textView"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="160dp"

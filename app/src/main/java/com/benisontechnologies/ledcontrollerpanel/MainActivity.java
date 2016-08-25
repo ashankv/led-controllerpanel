@@ -67,14 +67,20 @@ public class MainActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DiscoveryHelper.sendMulticastRequest();                         //DISCOVERY PT 1
-                DiscoveryHelper.getLedIdentifiers();                            //DISCOVERY PT 2
+                DiscoveryHelper.sendMulticastRequest(MainActivity.this);                         //DISCOVERY PT 1
+                boolean successInMakingCoapGroups = DiscoveryHelper.getLedIdentifiers();                            //DISCOVERY PT 2
                 Intent intent = new Intent(MainActivity.this, BallastActivity.class);
-                intent.putExtra("IP_ADDRESS", CoapHelper.coapGroups.get(0).getIpAddress());
-                intent.putExtra("GROUP_POSITION", 0);
-                intent.putExtra("LED_NAME", CoapHelper.coapGroups.get(0).getLeds().get(0).getLedName());
-                intent.putExtra("LED_POSITION", 0);
-                startActivity(intent);
+
+                if(successInMakingCoapGroups) {
+                    intent.putExtra("IP_ADDRESS", CoapHelper.coapGroups.get(0).getIpAddress());
+                    intent.putExtra("GROUP_POSITION", 0);
+                    intent.putExtra("LED_NAME", CoapHelper.coapGroups.get(0).getLeds().get(0).getLedName());
+                    intent.putExtra("LED_POSITION", 0);
+                    startActivity(intent);
+                }else{
+
+                }
+
             }
         });
     }

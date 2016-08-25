@@ -1,7 +1,13 @@
 package com.benisontechnologies.ledcontrollerpanel;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.StrictMode;
+import android.text.format.Formatter;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
@@ -21,111 +27,170 @@ public class DiscoveryHelper {
     private static CoapClient client;
     private static CoapResponse response;
 
-    public static void sendMulticastRequest(){
+    public static void sendMulticastRequest(Context context){
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        String msg = "Hello";
-
-        short[] hexArray = {0x42,0x01,0x61,0x25,0x15,0xF5,0xbb,
-                0x2e,0x77,0x65,0x6c,0x6c,0x2d,0x6b,0x6e,0x6f,
-                0x77,0x6e,0x04,0x63,0x6f,0x72,0x65,0x05,0x6c,
-                0x69,0x67,0x68,0x74,0x11,0x2a,0xb2,0x01,0x62};
-        byte[] hexValues = new byte[hexArray.length];
-        for(int i = 0; i < hexValues.length; i++){
-            hexValues[i] = (byte) hexArray[i];
-        }
-
+        InetAddress addr = null;
         try{
-            InetAddress group = InetAddress.getByName("224.0.0.1");
-            MulticastSocket mSocket = new MulticastSocket(5683);
-            mSocket.joinGroup(group);
-            DatagramPacket mPacket = new DatagramPacket(hexValues, hexValues.length, group, 5683);
-            //mPacket.setData(hexValues);
-            mSocket.send(mPacket);
-            byte[] buf = new byte[1000];
-            DatagramPacket respPacket = new DatagramPacket(buf, buf.length);
+            addr = InetAddress.getLocalHost();
+        }catch(Exception e){
 
-            while(true){
+        }
+        String phoneIP = addr.getHostAddress();
 
-                mSocket.receive(respPacket);                                                        //Do We Need To Add 1-2 Second Delay To Ensure We Get All Responses?
+        if (mWifi.isConnected()) {
 
-                if(respPacket == null){
-                    Log.d("DISCOVERY", "No More Devices To Be Found");
-                    break;
-                }
+            String msg = "Hello";
 
-                String tempIpAddress = respPacket.getAddress().toString();
-
-
-                boolean doesDeviceExist = false;
-
-                for(CoapGroup coapGroup : CoapHelper.coapGroups){                                   //Check If It Is Duplicate Response
-                    if(tempIpAddress == coapGroup.getIpAddress()){
-
-                        doesDeviceExist = true;
-                        break;
-                    }
-                }
-
-                if(doesDeviceExist  == false) {
-
-                    String tempCoapUrl = "coap://" + tempIpAddress + ":5683";
-                    CoapGroup tempCoapGroup = new CoapGroup();
-                    tempCoapGroup.setIpAddress(tempIpAddress);
-                    tempCoapGroup.setCoapGroupUrl(tempCoapUrl);
-
-                    CoapHelper.coapGroups.add(tempCoapGroup);
-                }
+            short[] hexArray = {0x42, 0x01, 0x61, 0x25, 0x15, 0xF5, 0xbb,
+                    0x2e, 0x77, 0x65, 0x6c, 0x6c, 0x2d, 0x6b, 0x6e, 0x6f,
+                    0x77, 0x6e, 0x04, 0x63, 0x6f, 0x72, 0x65, 0x05, 0x6c,
+                    0x69, 0x67, 0x68, 0x74, 0x11, 0x2a, 0xb2, 0x01, 0x62};
+            byte[] hexValues = new byte[hexArray.length];
+            for (int i = 0; i < hexValues.length; i++) {
+                hexValues[i] = (byte) hexArray[i];
             }
 
-        }catch(Exception e){
-            e.printStackTrace();
+            try {
+                InetAddress group = InetAddress.getByName("224.0.0.1");
+                MulticastSocket mSocket = new MulticastSocket(5683);
+                mSocket.joinGroup(group);
+                DatagramPacket mPacket = new DatagramPacket(hexValues, hexValues.length, group, 5683);
+                //mPacket.setData(hexValues);
+                mSocket.send(mPacket);
+                byte[] buf = new byte[1000];
+                DatagramPacket respPacket = new DatagramPacket(buf, buf.length);
+
+                int requestCount = 0;
+
+                mSocket.setSoTimeout(5000);
+
+                while(true){
+
+
+                    System.out.println("Before Receive");
+                    mSocket.receive(respPacket);                                                        //Do We Need To Add 1-2 Second Delay To Ensure We Get All Responses?
+                    System.out.println("After Receive");
+
+                    System.out.println(respPacket.getAddress());
+                    Log.d("DISCOVERY", Integer.toString(requestCount));
+
+
+                    if (respPacket == null) {
+
+                        if (requestCount == 0) {
+                            Toast.makeText(context, "No Devices Found On This Network", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Log.d("DISCOVERY", "No More Devices To Be Found");
+                        }
+
+                        break;
+                    }
+
+                    String tempIpAddress = respPacket.getAddress().toString();
+
+                    if(tempIpAddress == phoneIP){                                                   //If The IP Address = Phone Ip Address, Skip the Iteration
+                        continue;
+                    }
+
+                    boolean doesDeviceExist = false;
+
+                    for (CoapGroup coapGroup : CoapHelper.coapGroups) {                                   //Check If It Is Duplicate Response
+                        if (tempIpAddress == coapGroup.getIpAddress()) {
+
+                            doesDeviceExist = true;
+                            break;
+                        }
+                    }
+
+                    if (doesDeviceExist == false) {
+
+                        String tempCoapUrl = "coap://" + tempIpAddress + ":5683";
+                        CoapGroup tempCoapGroup = new CoapGroup();
+                        tempCoapGroup.setIpAddress(tempIpAddress);
+                        tempCoapGroup.setCoapGroupUrl(tempCoapUrl);
+
+                        CoapHelper.coapGroups.add(tempCoapGroup);
+                    }
+
+                    requestCount++;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        } else{
+            Toast.makeText(context, "Not Connected To WiFi. Please Try Again Later.", Toast.LENGTH_LONG).show();
 
         }
     }
 
-    public static void getLedIdentifiers(){
+    public static boolean getLedIdentifiers(){
 
-        for(CoapGroup coapGroup : CoapHelper.coapGroups) {
+        if(CoapHelper.coapGroups !=  null){
 
-            URI deviceCountURI = null;
-            try {
-                deviceCountURI = new URI(coapGroup.getCoapGroupUrl() + AppConfigurations.DEVICE_COUNT_URI);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            for(CoapGroup coapGroup : CoapHelper.coapGroups) {
 
-            client = new CoapClient(deviceCountURI);
-            response = client.get();
-            byte[] payload = response.getPayload();
+                URI deviceCountURI = null;
+                try {
+                    deviceCountURI = new URI(coapGroup.getCoapGroupUrl() + AppConfigurations.DEVICE_COUNT_URI);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            ArrayList<Integer> deviceCountPayload = new ArrayList<Integer>();
+                client = new CoapClient(deviceCountURI);
+                response = client.get();
+                byte[] payload = response.getPayload();
 
-            for(byte a : payload){
-                byte[] tempArray = {a};
-                ByteBuffer wrapped = ByteBuffer.wrap(tempArray); // big-endian by default
-                int convertedInt = wrapped.getInt();
-                Integer convertedInteger = new Integer(convertedInt);
-                deviceCountPayload.add(convertedInteger);
-            }
+                ArrayList<Integer> deviceCountPayload = new ArrayList<Integer>();
 
-            ArrayList<LED> ledArrayList = new ArrayList<LED>();
-            int numberOfDevices = deviceCountPayload.get(0);
+                for(byte a : payload){
+                    byte[] tempArray = {a};
+                    ByteBuffer wrapped = ByteBuffer.wrap(tempArray); // big-endian by default
+                    int convertedInt = wrapped.getInt();
+                    Integer convertedInteger = new Integer(convertedInt);
+                    deviceCountPayload.add(convertedInteger);
+                }
 
-            coapGroup.setNumberOfLeds(numberOfDevices);
+                ArrayList<LED> ledArrayList = new ArrayList<LED>();
+                int numberOfDevices = deviceCountPayload.get(0);
 
-            if(numberOfDevices > 1){
+                coapGroup.setNumberOfLeds(numberOfDevices);
 
-                coapGroup.setIsGroupOfLeds(true);
+                if(numberOfDevices > 1){
 
-                for(int i = 1; i<numberOfDevices; i++){                                             //Identifier Starts on 2nd Integer
+                    coapGroup.setIsGroupOfLeds(true);
 
-                    String tempIdentifier = Integer.toString(deviceCountPayload.get(i));
-                    LED tempLed = new LED();
-                    tempLed.setIdentifier(tempIdentifier);
+                    for(int i = 1; i<numberOfDevices; i++){                                             //Identifier Starts on 2nd Integer
+
+                        String tempIdentifier = Integer.toString(deviceCountPayload.get(i));
+                        LED tempLed = new LED();
+                        tempLed.setIdentifier(tempIdentifier);
+
+                        URI tempURI = null;
+                        try{
+                            tempURI = new URI(coapGroup.getCoapGroupUrl() + "?" + tempIdentifier);
+                        }catch(Exception e){
+
+                        }
+
+                        tempLed.setLedUri(tempURI);
+                        ledArrayList.add(tempLed);
+
+                    }
+                } else if(numberOfDevices == 1){
+                    coapGroup.setIsGroupOfLeds(false);
+                    LED led = new LED();
+                    String tempIdentifier = Integer.toString(deviceCountPayload.get(1));
+
+                    led.setIdentifier(tempIdentifier);
 
                     URI tempURI = null;
                     try{
@@ -134,58 +199,45 @@ public class DiscoveryHelper {
 
                     }
 
-                    tempLed.setLedUri(tempURI);
-                    ledArrayList.add(tempLed);
-
-                }
-            } else if(numberOfDevices == 1){
-                coapGroup.setIsGroupOfLeds(false);
-                LED led = new LED();
-                String tempIdentifier = Integer.toString(deviceCountPayload.get(1));
-
-                led.setIdentifier(tempIdentifier);
-
-                URI tempURI = null;
-                try{
-                    tempURI = new URI(coapGroup.getCoapGroupUrl() + "?" + tempIdentifier);
-                }catch(Exception e){
-
+                    led.setLedUri(tempURI);
+                    ledArrayList.add(led);
+                }  else{
+                    Log.d("DISCOVERY", "Invalid Value of Number of Devices");
                 }
 
-                led.setLedUri(tempURI);
-                ledArrayList.add(led);
-            }  else{
-                Log.d("DISCOVERY", "Invalid Value of Number of Devices");
-            }
-
-            ArrayList<Channel> channelArrayList = new ArrayList<Channel>();
+                ArrayList<Channel> channelArrayList = new ArrayList<Channel>();
 
 
 
-            for(int i = 0; i<AppConfigurations.numberOfChannels; i++){
-                Channel newChannel = new Channel();
+                for(int i = 0; i<AppConfigurations.numberOfChannels; i++){
+                    Channel newChannel = new Channel();
 
-                for(int x = 0; i<AppConfigurations.numberOfChannels; x++){                          ///Set Channel URI (/led/channel0, etc)
+                    for(int x = 0; i<AppConfigurations.numberOfChannels; x++){                          ///Set Channel URI (/led/channel0, etc)
 
-                    newChannel.setChannelSubURI(AppConfigurations.CHANNEL_PARAMS_URI + Integer.toString(x));
+                        newChannel.setChannelSubURI(AppConfigurations.CHANNEL_PARAMS_URI + Integer.toString(x));
+                    }
+
+                    channelArrayList.add(newChannel);
                 }
 
-                channelArrayList.add(newChannel);
+
+
+
+
+
+                for(LED led : ledArrayList){
+                    led.setChannels(channelArrayList);
+                }
+
+                coapGroup.setLeds(ledArrayList);
+
+                return true;
+
             }
-
-
-
-
-
-
-            for(LED led : ledArrayList){
-                led.setChannels(channelArrayList);
-            }
-
-            coapGroup.setLeds(ledArrayList);
-
-
-
+        } else{
+            return false;
         }
+
+        return false;
     }
 }
