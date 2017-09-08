@@ -264,6 +264,19 @@ public class CoapHelper {
 
         byte[] array12 = {payload[44], payload[45], payload[46], payload[47]};                      //MINUTIES ABOVE 80c
         led.setMinuties80c(ByteBuffer.wrap(array1).getInt());
+
+        byte[] array13 = {payload[48], payload[49], payload[50], payload[51]};
+        led.setMinuties80c(ByteBuffer.wrap(array1).getInt());
+
+        byte[] array14 = {payload[52], payload[53], payload[54], payload[55]};
+        led.setMinuties85c(ByteBuffer.wrap(array1).getInt());
+
+        byte[] array15 = {payload[56], payload[57], payload[58], payload[59]};
+        led.setMinuties90c(ByteBuffer.wrap(array1).getInt());
+
+        byte[] array16 = {payload[60], payload[61], payload[62], payload[63]
+
+        }
     }
 
 

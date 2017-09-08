@@ -34,7 +34,7 @@ public class GetStatusParamsTask extends AsyncTask<AsyncParam, Void, LED> {
                         (byte)0x0, (byte)0x0, (byte)0x0, (byte)0x38};
 
         //CoapHelper
-        CoapHelper.parseAndUpdateStatusParams(param.getCoapGroup().getLeds().get(CoapHelper.currLedSelPos), payload);
+        //CoapHelper.parseAndUpdateStatusParams(param.getCoapGroup().getLeds().get(CoapHelper.currLedSelPos), payload);
 
         try{
             Thread.sleep(5000);

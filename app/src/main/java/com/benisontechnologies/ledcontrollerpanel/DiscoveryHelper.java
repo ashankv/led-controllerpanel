@@ -134,8 +134,11 @@ public class DiscoveryHelper {
 
     public static boolean getLedIdentifiers(){
 
+        //Sets Identifiers of LED Objects
+
         if(CoapHelper.coapGroups !=  null){
 
+            //Only Proceed if There Are CoapGroups in the Global Arraylist
             for(CoapGroup coapGroup : CoapHelper.coapGroups) {
 
                 URI deviceCountURI = null;
@@ -220,11 +223,6 @@ public class DiscoveryHelper {
                     channelArrayList.add(newChannel);
                 }
 
-
-
-
-
-
                 for(LED led : ledArrayList){
                     led.setChannels(channelArrayList);
                 }
@@ -234,7 +232,7 @@ public class DiscoveryHelper {
                 return true;
 
             }
-        } else{
+        }else{
             return false;
         }
 

@@ -44,10 +44,10 @@ public class GetBallastParamsTask extends AsyncTask<AsyncParam, Void, LED> {
                           (byte)0x0, (byte)0x0, (byte)0x0, (byte)0x2A,
                           (byte)0x0, (byte)0x0, (byte)0x0, (byte)0x38};
 
-        CoapHelper.parseAndUpdateBallastParams(param.getCoapGroup().getLeds().get(CoapHelper.currLedSelPos), payload);
+        //CoapHelper.parseAndUpdateBallastParams(param.getCoapGroup().getLeds().get(CoapHelper.currLedSelPos), payload);
 
         try{
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         }catch(Exception e){
 
         }
@@ -110,38 +110,38 @@ public class GetBallastParamsTask extends AsyncTask<AsyncParam, Void, LED> {
         minLightText.setText(Integer.toString(myLed.getMinLightLevel()));
         maxLightText.setText(Integer.toString(myLed.getMaxLightLevel()));
 
-        if(myLed.isLedOn()){
+        //if(myLed.isLedOn()){
             lampStatusIcon.setColorFilter(colorGreen);
             lampStatusText.setTextColor(colorBlack);
             isOnSwitch.setChecked(true);
-        } else{
-            lampStatusIcon.setColorFilter(colorGray);
-            lampStatusText.setTextColor(colorGray);
-        }
+        //} else{
+            //lampStatusIcon.setColorFilter(colorGray);
+            //lampStatusText.setTextColor(colorGray);
+        //}
 
-        if(myLed.isOpenCircuit()){
-            openCircuitIcon.setColorFilter(colorRed);
-            openCircuitText.setTextColor(colorRed);
-        } else{
+        //if(myLed.isOpenCircuit()){
+        //    openCircuitIcon.setColorFilter(colorRed);
+        //    openCircuitText.setTextColor(colorRed);
+        //} else{
             openCircuitIcon.setColorFilter(colorGray);
             openCircuitText.setTextColor(colorGray);
-        }
+        //}
 
-        if(myLed.isShortCircuit()){
-            shortCircuitIcon.setColorFilter(colorRed);
-            shortCircuitText.setTextColor(colorRed);
-        } else{
+        //if(myLed.isShortCircuit()){
+        //    shortCircuitIcon.setColorFilter(colorRed);
+        //    shortCircuitText.setTextColor(colorRed);
+        //} else{
             shortCircuitIcon.setColorFilter(colorGray);
             shortCircuitText.setTextColor(colorGray);
-        }
+        //}
 
-        if(myLed.isOverTemperature()){
+        //if(myLed.isOverTemperature()){
             overTempIcon.setColorFilter(colorRed);
             overTempText.setTextColor(colorRed);
-        } else{
-            overTempIcon.setColorFilter(colorGray);
-            overTempText.setTextColor(colorGray);
-        }
+        //} else{
+        //    overTempIcon.setColorFilter(colorGray);
+        //    overTempText.setTextColor(colorGray);
+        //}
     }
 
 }

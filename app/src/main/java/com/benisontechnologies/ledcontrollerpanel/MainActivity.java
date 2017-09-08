@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar=(Toolbar) findViewById(R.id.discovery_bar);
+        mToolbar = (Toolbar) findViewById(R.id.discovery_bar);
         mToolbar.setTitle("Discover Your Devices");
         setSupportActionBar(mToolbar);
 
-        /*LED firstLED = new LED(1,2,3,4,5,6,7,8,9,10, "Living Room LED");                                  //SIMULATED DATA
-        LED anotherFirstLED = new LED(123, 421, 524, 983, 1238, 1249, 989, 100, 28, 38, "Family Room LED");
+        LED firstLED = new LED(844,397,289,589,489,49,59,22,34,10, "Living Room LED");                                  //SIMULATED DATA
+        LED anotherFirstLED = new LED(123, 421, 524, 983, 120, 79, 42, 100, 28, 38, "Family Room LED");
         ArrayList<LED> firstLEDArrayList = new ArrayList<LED>();
         ArrayList<Channel> channelArrayList = new ArrayList<Channel>();
 
@@ -59,27 +59,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CoapHelper.coapGroups.add(firstCoapGroup);
-        CoapHelper.coapGroups.add(secondCoapGroup); */                   //SIMULATED DATA
+        CoapHelper.coapGroups.add(secondCoapGroup);                   //SIMULATED DATA
 
 
 
         nextButton = (Button) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(  new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DiscoveryHelper.sendMulticastRequest(MainActivity.this);                         //DISCOVERY PT 1
-                boolean successInMakingCoapGroups = DiscoveryHelper.getLedIdentifiers();                            //DISCOVERY PT 2
+                //DiscoveryHelper.sendMulticastRequest(MainActivity.this);                         //DISCOVERY PT 1
+                //boolean successInMakingCoapGroups = DiscoveryHelper.getLedIdentifiers();                            //DISCOVERY PT 2
                 Intent intent = new Intent(MainActivity.this, BallastActivity.class);
 
-                if(successInMakingCoapGroups) {
+                //if(successInMakingCoapGroups) {
                     intent.putExtra("IP_ADDRESS", CoapHelper.coapGroups.get(0).getIpAddress());
                     intent.putExtra("GROUP_POSITION", 0);
                     intent.putExtra("LED_NAME", CoapHelper.coapGroups.get(0).getLeds().get(0).getLedName());
                     intent.putExtra("LED_POSITION", 0);
                     startActivity(intent);
-                }else{
+                //}else{
 
-                }
+                //}
 
             }
         });

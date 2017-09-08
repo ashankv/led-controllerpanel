@@ -20,7 +20,7 @@ public class GetChannelParamsTask extends AsyncTask<AsyncParam, Void, LED> {
 
         AsyncParam param = groups[0];
 
-        CoapHelper.getChannelParams(param.getCoapGroup(), param.getLedPosition(), param.getChannelPosition());
+       // CoapHelper.getChannelParams(param.getCoapGroup(), param.getLedPosition(), param.getChannelPosition());
 
 
 
@@ -40,11 +40,11 @@ public class GetChannelParamsTask extends AsyncTask<AsyncParam, Void, LED> {
 
         LED myLed = CoapHelper.coapGroups.get(CoapHelper.currCoapGrpSelPos).getLeds().get(CoapHelper.currLedSelPos);
         Channel currentChannel = myLed.getChannels().get(CoapHelper.currChannelSelPos);
-        currentPower.setText(currentChannel.getChannelCurrentPower());
-        voltage.setText(currentChannel.getChannelVoltage());
-        maxPower.setText(currentChannel.getChannelMaxPower());
-        peakCurrent.setText(currentChannel.getChannelPeakCurrent());
-        acOffset.setText(currentChannel.getChannelACOffset());
+        //currentPower.setText(currentChannel.getChannelCurrentPower());
+        //voltage.setText(currentChannel.getChannelVoltage());
+        //maxPower.setText(currentChannel.getChannelMaxPower());
+        //peakCurrent.setText(currentChannel.getChannelPeakCurrent());
+        //acOffset.setText(currentChannel.getChannelACOffset());
 
     }
 
