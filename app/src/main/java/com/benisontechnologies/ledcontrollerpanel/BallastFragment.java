@@ -305,11 +305,15 @@ public class BallastFragment extends Fragment {
                 //To Be Changed
 
                 if(currentCoapGroup.isGroupOfLeds()){
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.STEP_UP_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.STEP_UP_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "STEPPED UP", Toast.LENGTH_LONG).show();
+
                 } else{
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.STEP_UP_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.STEP_UP_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "STEPPED UP", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -322,11 +326,15 @@ public class BallastFragment extends Fragment {
                 //To Be Changed
 
                 if(currentCoapGroup.isGroupOfLeds()){
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.STEP_DOWN_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.STEP_DOWN_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "STEPPED DOWN", Toast.LENGTH_LONG).show();
+
                 } else{
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.STEP_DOWN_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.STEP_DOWN_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "STEPPED DOWN", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -339,11 +347,15 @@ public class BallastFragment extends Fragment {
                 //To Be Changed
 
                 if (currentCoapGroup.isGroupOfLeds()) {
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.GO_MAX_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.GO_MAX_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "GO MAX", Toast.LENGTH_LONG).show();
+
                 } else {
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.GO_MAX_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.GO_MAX_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "GO MAX", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -356,11 +368,15 @@ public class BallastFragment extends Fragment {
 
 
                 if (currentCoapGroup.isGroupOfLeds()) {
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.GO_MIN_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.GO_MIN_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "GO MIN", Toast.LENGTH_LONG).show();
+
                 } else {
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.GO_MIN_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.GO_MIN_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "GO MIN", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
