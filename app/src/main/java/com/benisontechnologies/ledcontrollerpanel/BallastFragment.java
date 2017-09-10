@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
@@ -264,11 +265,14 @@ public class BallastFragment extends Fragment {
                  //To Be Changed
 
                 if(currentCoapGroup.isGroupOfLeds()){
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.TURN_OFF_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.TURN_OFF_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "TURNED ON", Toast.LENGTH_LONG).show();
+
                 } else{
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.TURN_ON_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                   //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.TURN_ON_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "TURNED ON", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -281,11 +285,14 @@ public class BallastFragment extends Fragment {
                 //To Be Changed
 
                 if(currentCoapGroup.isGroupOfLeds()){
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.TURN_ON_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, CoapHelper.currLedSelPos, array, context, AppConfigurations.TURN_ON_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "TURNED OFF", Toast.LENGTH_LONG).show();
                 } else{
-                    AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.TURN_OFF_CMD);
-                    new ButtonCmdTask().execute(asyncParam);
+                    //AsyncParam asyncParam = new AsyncParam(currentCoapGroup, 0, array, context, AppConfigurations.TURN_OFF_CMD);
+                    //new ButtonCmdTask().execute(asyncParam);
+                    Toast.makeText(context, "TURNED OFF", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
